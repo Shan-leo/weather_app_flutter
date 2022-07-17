@@ -6,10 +6,18 @@ class LoadingScreen extends StatefulWidget {
   _LoadingScreenState createState() => _LoadingScreenState();
 }
 
+
 class _LoadingScreenState extends State<LoadingScreen> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    geoLocation();
+    super.initState();
+  }
+
   void geoLocation() async {
     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
-
     await Geolocator.checkPermission();
     await Geolocator.requestPermission();
     Position position = await Geolocator.getCurrentPosition(
@@ -21,13 +29,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            //Get the current location
-            geoLocation();
-          },
-          child: Text('Get Location'),
-        ),
       ),
     );
   }
